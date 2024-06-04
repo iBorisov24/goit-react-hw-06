@@ -6,7 +6,7 @@ import css from './ContactForm.module.css';
 import { useDispatch } from 'react-redux';
 import { addContact } from '../../redux/contactsSlice';
 
-export default function ContactForm({ onAdd }) {
+export default function ContactForm() {
 	const formSchema = Yup.object().shape({
 		name: Yup.string()
 			.min(3, 'Too short name')
@@ -22,12 +22,7 @@ export default function ContactForm({ onAdd }) {
 		<Formik
 			initialValues={{ name: '', number: '' }}
 			onSubmit={values => {
-				const contact = {
-					name: values.name,
-					number: values.number,
-					id: nanoid(),
-				};
-				dispatch(addContact(contact));
+				dispatch(addContact(values));
 			}}
 			validationSchema={formSchema}
 		>

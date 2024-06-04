@@ -18,10 +18,12 @@ const contactSlice = createSlice({
 			reducer(state, action) {
 				state.contacts.items.push(action.payload);
 			},
-			prepare(text) {
+			prepare(contact) {
 				return {
-					payload: text,
-					id: crypto.randomUUID(),
+					payload: {
+						id: crypto.randomUUID(),
+						...contact,
+					},
 				};
 			},
 		},
